@@ -53,3 +53,27 @@ exports.deletePost = async (request, h) => {
         return h.response({ message: error.message }).code(500);
     }
 };
+
+//Update a post
+exports.updatePost = async (request, h) => {
+
+    const {id} = request.params;
+    const { title, images = [], description   } = request.payload;
+
+    try {
+        
+        const updatedPost = await Post.findByIdAndUpdate(id, {
+            title,
+            images,
+            description            
+        }, { new: true });
+
+        if (!updatedPost) {
+            return h.response({ message: 'Couldn´t find post.' }).code(404);
+        } else {
+            return h.response({ message: 'Post have been updated.', updatedPost }).code(200);
+        }
+    } catch (error) {
+        return h.response({ message: error.message }).code(500);
+    }
+};

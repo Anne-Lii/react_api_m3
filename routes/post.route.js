@@ -26,5 +26,10 @@ module.exports = [
         method: 'DELETE',
         path: '/post/{id}',
         handler: PostController.deletePost 
+    },
+    {   //PUT route to update a post by id
+        method: 'PUT',
+        path: '/post/{id}',
+        handler: PostController.updatePost
     }
 ];
