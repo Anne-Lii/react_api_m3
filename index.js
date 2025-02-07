@@ -5,6 +5,8 @@ const Hapi = require('@hapi/hapi'); //require hapi
 const mongoose = require('mongoose'); //Imports Mongoose library 
 require('dotenv').config(); //Get environment variables from the .env file
 
+const PostRoutes = require('./routes/post.route');
+
 const init = async () => {
 
     // Creates a new Hapi server instance with CORS enabled
@@ -28,14 +30,7 @@ const init = async () => {
     });
 
     //Routes
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: (request, h) => {
-
-            return 'Hello World!';
-        }
-    });
+    server.route(PostRoutes);
 
     //starting server
     await server.start();
