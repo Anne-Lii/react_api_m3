@@ -38,3 +38,18 @@ exports.createNewPosts = async (request, h) => {
     }
 };
 
+//Delete a post
+exports.deletePost = async (request, h) => {
+    try {
+        const {id} = request.params;
+        const deletedPost = await Post.findByIdAndDelete(id);
+
+        if (!deletedPost) {
+            return h.response({ message: 'Couldn´t find post.' }).code(404);
+        } else {
+            return h.response({ message: 'Post has been removed.', post: deletedPost }).code(200);
+        }
+    } catch (error) {
+        return h.response({ message: error.message }).code(500);
+    }
+};
