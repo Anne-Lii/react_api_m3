@@ -43,7 +43,10 @@ exports.login = async (request, h) => {
                 expiresIn: '1h'// jwt token valid for one hour
             });
     
-            return h.response({ token }).code(200);
+            return h.response({ 
+                user: { email: user.email },  //return email and token
+                token 
+            }).code(200);
         }
         
     } catch (error) {
