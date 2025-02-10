@@ -2,7 +2,7 @@
 
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+
 
 //register a new user
 exports.register = async (request, h) => {
@@ -51,5 +51,23 @@ exports.login = async (request, h) => {
         
     } catch (error) {
         return h.response({ message: error.message }).code(500);
+    }
+};
+
+//validate token
+exports.validateToken = (request, h) => {
+    const authHeader = request.headers.authorization;
+    
+    if (!authHeader) {
+        return h.response({ message: 'Ingen token angiven' }).code(403);
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return h.response({ valid: true, user: decoded }).code(200);
+    } catch (error) {
+        return h.response({ valid: false, message: 'Ogiltig token' }).code(401);
     }
 };
