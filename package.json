@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^21.3.12",
+    "@hapi/jwt": "^3.2.0",
+    "cloudinary": "^2.5.1",
     "dotenv": "^16.4.7",
     "mongoose": "^8.10.0"
   }

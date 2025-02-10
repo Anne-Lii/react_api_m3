@@ -3,6 +3,7 @@
 //includes
 const Hapi = require('@hapi/hapi'); //require hapi
 const mongoose = require('mongoose'); //Imports Mongoose library 
+
 require('dotenv').config(); //Get environment variables from the .env file
 
 const PostRoutes = require('./routes/post.route');

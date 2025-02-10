@@ -20,19 +20,17 @@ exports.getAllPosts = async (request, h) => {
 
 //Create a new post
 exports.createNewPosts = async (request, h) => {
-    const { title, images = [], description  } = request.payload;
+    const { title, description  } = request.payload;
 
     try {
         const newPost = new Post({
-
             title,
-            images,
             description
         });
 
         const savedPost = await newPost.save();
-        return h.response({message: 'Post has been added.', savedPost}).code(201);
-        
+        return h.response({ message: 'Post has been added.', savedPost }).code(201);
+
     } catch (error) {
         return h.response({ message: error.message }).code(500);
     }
@@ -58,13 +56,12 @@ exports.deletePost = async (request, h) => {
 exports.updatePost = async (request, h) => {
 
     const {id} = request.params;
-    const { title, images = [], description   } = request.payload;
+    const { title, description   } = request.payload;
 
     try {
         
         const updatedPost = await Post.findByIdAndUpdate(id, {
             title,
-            images,
             description            
         }, { new: true });
 
