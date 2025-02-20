@@ -18,6 +18,23 @@ exports.getAllPosts = async (request, h) => {
     }
 };
 
+//Get a post with id
+exports.getOnePost = async (request, h) => {
+
+        try {
+            const {id} = request.params;
+            const post = await Post.findById(id);
+
+            if (!post) {
+                return h.response({ message: 'Inlägget kunde inte hittas.' }).code(404);
+            } else {
+                return h.response().code(200);
+            }
+        } catch (error) {
+            return h.response({ message: error.message }).code(500);
+        }
+};
+
 //Create a new post
 exports.createNewPosts = async (request, h) => {
     const { title, description  } = request.payload;
