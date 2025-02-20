@@ -15,6 +15,10 @@ module.exports = [
         path: '/post',      
         handler: PostController.getAllPosts
     },
+    { method: 'GET',    
+        path: '/post/{id}',      
+        handler: PostController.getOnePost
+    },
     { method: 'POST',   
         path: '/post',      
         handler: PostController.createNewPosts, 
