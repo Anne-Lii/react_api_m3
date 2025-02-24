@@ -28,7 +28,7 @@ exports.getOnePost = async (request, h) => {
             if (!post) {
                 return h.response({ message: 'Inlägget kunde inte hittas.' }).code(404);
             } else {
-                return h.response().code(200);
+                return h.response(post).code(200);
             }
         } catch (error) {
             return h.response({ message: error.message }).code(500);
